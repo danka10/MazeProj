@@ -39,6 +39,7 @@ public class MyCompressorOutputStream extends OutputStream {
 		}
 		out.write(count);
 		out.write(currByte);
+		//coment
 		
 	}
 
