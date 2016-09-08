@@ -46,12 +46,15 @@ public class Maze3d {
 	}
 	public byte[] toByteArray() {
 		ArrayList<Byte> arr = new ArrayList<Byte>();
+		arr.add((byte)floors);
 		arr.add((byte)rows);
 		arr.add((byte)cols);
 		arr.add((byte)startPosition.x);
 		arr.add((byte)startPosition.y);
+		arr.add((byte)startPosition.z);
 		arr.add((byte)goalPosition.x);
 		arr.add((byte)goalPosition.y);
+		arr.add((byte)goalPosition.z);
 		
 		for (int x = 0; x < floors; x++) {
 			for (int y = 0; y < rows; y++) {
