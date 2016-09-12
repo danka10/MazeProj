@@ -57,7 +57,7 @@ public class Demo {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}		
-				
+		// load file from file		
 				InputStream in;
 				try {
 					 in=new MyDecompressorInputStream(new FileInputStream("1.maz"));
