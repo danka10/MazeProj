@@ -45,14 +45,11 @@ public class Demo {
 		// save it to a file
 				OutputStream out;
 				try {
-					out = new MyCompressorOutputStream(
-							new FileOutputStream("1.maz"));
-					byte[] arr = maze.toByteArray();
-					
-					out.write(arr.length);
-					out.write(arr);
-					out.flush();
-					out.close();
+					 out=new MyCompressorOutputStream(new FileOutputStream("1.maz"));
+						out.write(maze.toByteArray());
+						out.flush();
+						out.close();
+
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -63,16 +60,13 @@ public class Demo {
 				
 				InputStream in;
 				try {
-					in = new MyDecompressorInputStream(
-						new FileInputStream("1.maz"));
-					int size = in.read();			
-					byte b[]=new byte[size];
-					in.read(b);
-					in.close();	
-					
-					Maze3d loaded = new Maze3d(b);
-					System.out.println("maze loaded from file:");
-					System.out.println(loaded);
+					 in=new MyDecompressorInputStream(new FileInputStream("1.maz"));
+						byte b[]=new byte[maze.toByteArray().length];
+						in.read(b);
+						in.close();
+						Maze3d loaded=new Maze3d(b);
+						System.out.println(loaded.equals(maze));
+
 					
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
