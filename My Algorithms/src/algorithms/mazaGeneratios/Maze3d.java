@@ -45,32 +45,49 @@ public class Maze3d {
 		}
 	}
 	public byte[] toByteArray() {
-		ArrayList<Byte> arr = new ArrayList<Byte>();
-		arr.add((byte)floors);
-		arr.add((byte)rows);
-		arr.add((byte)cols);
-		arr.add((byte)startPosition.x);
-		arr.add((byte)startPosition.y);
-		arr.add((byte)startPosition.z);
-		arr.add((byte)goalPosition.x);
-		arr.add((byte)goalPosition.y);
-		arr.add((byte)goalPosition.z);
+		ArrayList<Byte> btarr = new ArrayList<Byte>();
+		//adds the maze shape
+		btarr.add((byte)floors);
+		btarr.add((byte)rows);
+		btarr.add((byte)cols);
+		//adds the start position
+		btarr.add((byte)startPosition.x);
+		btarr.add((byte)startPosition.y);
+		btarr.add((byte)startPosition.z);
+		//adds the goal position
+		btarr.add((byte)goalPosition.x);
+		btarr.add((byte)goalPosition.y);
+		btarr.add((byte)goalPosition.z);
 		
 		for (int x = 0; x < floors; x++) {
 			for (int y = 0; y < rows; y++) {
 				for (int z = 0; z < cols; z++) {
-				arr.add((byte)maze[x][y][z]);
+					btarr.add((byte)maze[x][y][z]);
 				}
 			}			
 		}
 		
-		byte[] bytes = new byte[arr.size()];
-		for (int i = 0; i < bytes.length; i++) {
-			bytes[i] = (byte)arr.get(i);
+		byte[] rbytes = new byte[btarr.size()];
+		for (int i = 0; i < rbytes.length; i++) {
+			rbytes[i] = (byte)btarr.get(i);
 		}
-		return bytes;
+		return rbytes;
 	}
 
+	public boolean equals(Object obj) {
+		Maze3d maz = (Maze3d)obj;
+		for (int x = 0; x < floors; x++) {
+			for (int y = 0; y < rows; y++) {
+				for (int z = 0; z < cols; z++) {
+					if(this.maze[x][y][z] != maz.maze[x][y][z])
+						return false;
+				}
+			}
+		}
+		if (this.goalPosition.equals(maz.goalPosition) || this.startPosition.equals(maz.startPosition))
+			return true;
+		return false;
+	}
 	
 	public void init(){
 		for (int x = 0; x < floors; x++) {
