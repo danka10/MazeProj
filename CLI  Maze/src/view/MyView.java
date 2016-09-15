@@ -1,6 +1,7 @@
 package view;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
@@ -48,5 +49,29 @@ public class MyView implements View {
 		// TODO Auto-generated method stub
 		cli.start();
 	}
+	@Override
+	public void displayPath(String path) {
+		File folder = new File(path);
+	    File[] filesList = folder.listFiles();
+        for(File f : filesList){
+            if(f.isDirectory())
+                System.out.println(f.getName());
+            if(f.isFile()){
+                System.out.println(f.getName());
+            }
+        }
+	}
 
+	@Override
+	public void displaySection(String index, Maze3d maze, int num) {
+		switch(index)
+				{
+					//case "z" : out.print(maze.printCross(maze.getCrossSectionByZ(num)));; break;
+				//	case "y" : out.print(maze.printCross(maze.getCrossSectionByY(num)));; break;
+					//case "x" : out.print(maze.printCross(maze.getCrossSectionByX(num)));; break;
+					//default : throw new IllegalArgumentException("No such index: " + index);
+				}
+
+	}
+	
 }

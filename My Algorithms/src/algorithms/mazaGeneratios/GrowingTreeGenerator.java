@@ -34,11 +34,11 @@ public class GrowingTreeGenerator extends Maze3dGeneratorBase {
 		 
 		if (choice == 1){
 			userSelection = new ChooseRandom();
-		System.out.println("choice == 1");
+		//System.out.println("choice == 1");
 		}
 		else if (choice == 2){
 			userSelection = new ChooseLastFromString();
-			System.out.println("choice == 2");
+			//System.out.println("choice == 2");
 		}
 		while (!cells.isEmpty() && !isDone) {
 			// Choose the last cell from the list

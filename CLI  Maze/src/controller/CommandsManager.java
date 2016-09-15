@@ -20,6 +20,8 @@ public class CommandsManager {
 		HashMap<String, Command> commands = new HashMap<String, Command>();
 		commands.put("generate_3d_maze", new GenerateMazeCommand());
 		commands.put("display", new DisplayMazeCommand());
+		commands.put("dir", new DisplayDirectory());
+		commands.put("display_cross_section", new DisplayCrossSection());
 		
 		return commands;
 	}
@@ -47,5 +49,28 @@ public class CommandsManager {
 		
 	}
 	
+	public class DisplayDirectory implements Command {
+
+		@Override
+		public void doCommand(String[] args) {
+			String path = args[0];
+			view.displayPath(path);
+		}
+		
+	}
+	
+	public class DisplayCrossSection implements Command {
+
+		@Override
+		public void doCommand(String[] args) {
+			String index = args[0];
+			String name = args[1];
+			int num = Integer.parseInt(args[2]);
+			Maze3d maze = model.getMaze(name);
+			view.displayMaze(maze);
+			view.displaySection(index, maze, num);
+		}
+		
+	}
 	
 }

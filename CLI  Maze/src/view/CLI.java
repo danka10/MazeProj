@@ -33,7 +33,7 @@ public class CLI {
 			@Override
 			public void run() {
 				while (true) {
-				
+			
 					printMenu();
 					try {
 						String commandLine = in.readLine();
