@@ -46,8 +46,7 @@ public class CLI {
 						else {
 							String[] args = null;
 							if (arr.length > 1) {
-								String commandArgs = commandLine.substring(
-										commandLine.indexOf(" ") + 1);
+								String commandArgs = commandLine.substring(commandLine.indexOf(" ") + 1);
 								args = commandArgs.split(" ");							
 							}
 							Command cmd = commands.get(command);
