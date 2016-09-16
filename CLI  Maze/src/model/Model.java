@@ -6,6 +6,7 @@ import controller.Controller;
 public interface Model {
 	void generateMaze(String name, int floors, int rows, int cols);
 	Maze3d getMaze(String name);
+	void solveMaze(Maze3d maze, String alg);
 	void exit();
 	void setController(Controller controller);
 	

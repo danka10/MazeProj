@@ -12,6 +12,7 @@ import algorithms.mazaGeneratios.Maze3d;
 import algorithms.mazaGeneratios.Maze3dGenerator;
 import algorithms.mazaGeneratios.Position;
 import algorithms.search.BFS;
+import algorithms.search.DFS;
 import algorithms.search.Solution;
 import algorithms.io.MyCompressorOutputStream;
 import algorithms.io.MyDecompressorInputStream;
@@ -41,6 +42,11 @@ public class Demo {
 		Solution<Position> solution = bfs.search(adapter);
 		System.out.println(solution);
 		System.out.println(bfs.getNumberOfNodesEvaluated());
+		//MazeAdapter adapter2 = new MazeAdapter(maze);
+		DFS<Position> dfs = new DFS<Position>();
+		Solution<Position> solution2 = dfs.search(adapter);
+		System.out.println(solution2);
+		System.out.println(dfs.getNumberOfNodesEvaluated());
 		
 		// save it to a file
 				OutputStream out;

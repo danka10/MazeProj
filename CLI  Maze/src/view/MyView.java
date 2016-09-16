@@ -49,6 +49,7 @@ public class MyView implements View {
 		// TODO Auto-generated method stub
 		cli.start();
 	}
+	
 	@Override
 	public void displayPath(String path) {
 		File folder = new File(path);
@@ -63,15 +64,13 @@ public class MyView implements View {
 	}
 
 	@Override
-	public void displaySection(String index, Maze3d maze, int num) {
-		switch(index)
-				{
-					//case "z" : out.print(maze.printCross(maze.getCrossSectionByZ(num)));; break;
-				//	case "y" : out.print(maze.printCross(maze.getCrossSectionByY(num)));; break;
-					//case "x" : out.print(maze.printCross(maze.getCrossSectionByX(num)));; break;
-					//default : throw new IllegalArgumentException("No such index: " + index);
-				}
-
+	public void displayMaze(int[][] maze2d) {
+		for (int i = 0; i < maze2d.length; i++) {
+			for (int j = 0; j < maze2d[i].length; j++) {
+				System.out.print(maze2d[i][j]);
+			}	
+			System.out.println();
+		}
 	}
 	
 }

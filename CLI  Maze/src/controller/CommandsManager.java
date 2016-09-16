@@ -22,6 +22,7 @@ public class CommandsManager {
 		commands.put("display", new DisplayMazeCommand());
 		commands.put("dir", new DisplayDirectory());
 		commands.put("display_cross_section", new DisplayCrossSection());
+		commands.put("solve", new MazeSolver());
 		
 		return commands;
 	}
@@ -36,6 +37,18 @@ public class CommandsManager {
 			int cols = Integer.parseInt(args[3]);
 			model.generateMaze(name, floors, rows, cols);
 		}		
+	}
+	
+	public class MazeSolver implements Command {
+
+		@Override
+		public void doCommand(String[] args) {
+			String name = args[0];
+			String alg = args[1];
+			Maze3d maze = model.getMaze(name);
+			model.solveMaze(maze, alg);
+		}
+		
 	}
 	
 	public class DisplayMazeCommand implements Command {
@@ -63,12 +76,24 @@ public class CommandsManager {
 
 		@Override
 		public void doCommand(String[] args) {
-			String index = args[0];
-			String name = args[1];
-			int num = Integer.parseInt(args[2]);
+			String name = args[0];
+			String index = args[1];
+			int sector = Integer.parseInt(args[2]);
 			Maze3d maze = model.getMaze(name);
-			view.displayMaze(maze);
-			view.displaySection(index, maze, num);
+			
+			int[][] maze2d = null;
+			try
+			{
+				switch(index){
+					case "X":maze2d = maze.getCrossSectionByX(sector);; break;
+					case "Y":maze2d = maze.getCrossSectionByY(sector);; break;
+					case "Z":maze2d = maze.getCrossSectionByZ(sector);; break;
+					default:throw new Exception("Sector choice Error");
+				}
+			}catch (Exception e){
+				
+			}
+			view.displayMaze(maze2d);
 		}
 		
 	}

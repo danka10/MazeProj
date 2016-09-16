@@ -200,37 +200,40 @@ public class Maze3d {
 	}
 
 	public int[][] getCrossSectionByX(int i) {
+		System.out.println("secx");
 		if (i >= this.floors || i < 0)
 			throw new IndexOutOfBoundsException();
 		int mas[][] = new int[this.rows][this.cols];
 		for (int y = 0; y < rows; y++) {
 			for (int z = 0; z < cols; z++) {
 				
-				mas[i][y] = maze[this.floors][y][z];
+				mas[y][z] = maze[i][y][z];
 			}
 		}
 		return mas;
 	}
 
 	public int[][] getCrossSectionByY(int i) {
+		System.out.println("secy");
 		if (i >= this.rows || i < 0)
 			throw new IndexOutOfBoundsException();
 		int mas[][] = new int[this.cols][this.floors];
 		for (int z = 0; z < cols; z++) {
 			for (int x = 0; x < floors; x++) {
-				mas[i][z] = maze[x][this.rows][z];
+				mas[z][x] = maze[x][i][z];
 			}
 		}
 		return mas;
 	}
 
 	public int[][] getCrossSectionByZ(int i) {
+		System.out.println("secz");
 		if (i >= this.cols || i < 0)
 			throw new IndexOutOfBoundsException();
 		int mas[][] = new int[this.floors][this.rows];
 		for (int x = 0; x < floors; x++) {
 			for (int y = 0; y < rows; y++) {
-				mas[i][x] = maze[x][y][this.cols];
+				mas[x][y] = maze[x][y][i];
 			}
 		}
 		return mas;
