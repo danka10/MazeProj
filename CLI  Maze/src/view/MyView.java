@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 import algorithms.mazaGeneratios.Maze3d;
+import algorithms.mazaGeneratios.Position;
+import algorithms.search.Solution;
 import controller.Command;
 import controller.Controller;
 
@@ -33,6 +35,12 @@ public class MyView implements View {
 		out.flush();
 	}
 
+	@Override
+	public void notifyMazeIsSolved(String name) {
+		out.println("maze " + name + " was solved");
+		out.flush();
+	}
+	
 	@Override
 	public void displayMaze(Maze3d maze) {
 		out.println(maze);
@@ -72,5 +80,12 @@ public class MyView implements View {
 			System.out.println();
 		}
 	}
+
+	@Override
+	public void displaySolution(Solution<Position> sol) {
+			System.out.println(sol);
+		
+	}
+
 	
 }

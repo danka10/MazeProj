@@ -3,6 +3,8 @@ package controller;
 import java.util.HashMap;
 
 import algorithms.mazaGeneratios.Maze3d;
+import algorithms.mazaGeneratios.Position;
+import algorithms.search.Solution;
 import model.Model;
 import view.View;
 
@@ -23,6 +25,7 @@ public class CommandsManager {
 		commands.put("dir", new DisplayDirectory());
 		commands.put("display_cross_section", new DisplayCrossSection());
 		commands.put("solve", new MazeSolver());
+		commands.put("display_solution", new DisplaySolution());
 		
 		return commands;
 	}
@@ -46,7 +49,7 @@ public class CommandsManager {
 			String name = args[0];
 			String alg = args[1];
 			Maze3d maze = model.getMaze(name);
-			model.solveMaze(maze, alg);
+			model.solveMaze(maze, alg, name);
 		}
 		
 	}
@@ -68,6 +71,17 @@ public class CommandsManager {
 		public void doCommand(String[] args) {
 			String path = args[0];
 			view.displayPath(path);
+		}
+		
+	}
+	
+	public class DisplaySolution implements Command {
+
+		@Override
+		public void doCommand(String[] args) {
+			String name = args[0];
+			Solution<Position> sol = model.getSolution(name);
+			view.displaySolution(sol);
 		}
 		
 	}

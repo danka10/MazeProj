@@ -1,5 +1,6 @@
 package controller;
 
+import algorithms.mazaGeneratios.Maze3d;
 import model.Model;
 import view.View;
 
@@ -27,5 +28,13 @@ public class MyController implements Controller {
 	public void notifyMazeIsReady(String name) {
 		view.notifyMazeIsReady(name);
 	}
+
+
+	@Override
+	public void notifyMazeIsSolved(String name) {
+		view.notifyMazeIsSolved(name);
+		
+	}
+
 
 }

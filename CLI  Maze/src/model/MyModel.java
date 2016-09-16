@@ -55,7 +55,7 @@ public class MyModel implements Model {
 	
 	private Controller controller;	
 	private Map<String, Maze3d> mazes = new ConcurrentHashMap<String, Maze3d>();
-	
+	private Map<String, Solution<Position>> solutions = new ConcurrentHashMap<String, Solution<Position>>();
 	private List<Thread> threads = new ArrayList<Thread>();
 	
 	
@@ -84,7 +84,7 @@ public class MyModel implements Model {
 	}
 
 	@Override
-	public void solveMaze(Maze3d maze, String alg) {
+	public void solveMaze(Maze3d maze, String alg, String name) {
     	adapter = new MazeAdapter(maze);
 	    try {
             switch(alg) {
@@ -92,22 +92,27 @@ public class MyModel implements Model {
                 	System.out.println("BFS");
         			bfs = new BFS<Position>();
         			solution = bfs.search(adapter);
-        			System.out.println(solution);
-        			System.out.println(bfs.getNumberOfNodesEvaluated());
+        			solutions.put(name, solution);
+        			controller.notifyMazeIsSolved(name);
         			break;
                 case "DFS": 
                 	System.out.println("DFS");
-        		    //adapter2 = new MazeAdapter(maze);
         			dfs = new DFS<Position>();
-        			solution2 = dfs.search(adapter);
-        			System.out.println(solution2);
-        			System.out.println(dfs.getNumberOfNodesEvaluated());
+        			solution = dfs.search(adapter);
+        			solutions.put(name, solution);
+        			controller.notifyMazeIsSolved(name);
         			break;
             }
 	    } catch (Exception e) {
             System.out.print("RuntimeException: ");
         } 
 
+	}
+
+
+	@Override
+	public Solution<Position> getSolution(String name) {
+		return solutions.get(name);
 	}
 
 	
