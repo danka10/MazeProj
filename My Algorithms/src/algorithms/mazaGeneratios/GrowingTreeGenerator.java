@@ -11,7 +11,7 @@ public class GrowingTreeGenerator extends Maze3dGeneratorBase {
 	private Scanner in;	
 	
 	@Override
-	public Maze3d generate(int floors, int rows, int cols) {		
+	public Maze3d generate(int metho, int floors, int rows, int cols) {		
 		Maze3d maze = new Maze3d(floors, rows, cols);
 		List<Position> cells = new ArrayList<Position>();
 		ChooseMethod userSelection = null;
@@ -25,21 +25,11 @@ public class GrowingTreeGenerator extends Maze3dGeneratorBase {
 
 		cells.add(startPos);
 		
-		System.out.println("Choose 1 - For a Random Choice from the list");
-		System.out.println("Choose 2 - To Choose the last index in the list");
-		System.out.println("Choice: ");
-		in = new Scanner(System.in); 
-		int choice = in.nextInt();
-		 
-		 
-		if (choice == 1){
+		if(metho == 1)
 			userSelection = new ChooseRandom();
-		//System.out.println("choice == 1");
-		}
-		else if (choice == 2){
+		else if(metho == 2)
 			userSelection = new ChooseLastFromString();
-			//System.out.println("choice == 2");
-		}
+		
 		while (!cells.isEmpty() && !isDone) {
 			// Choose the last cell from the list
 			Position pos = cells.get(cells.size() - 1);	

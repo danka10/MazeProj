@@ -11,6 +11,12 @@ import model.MyModel;
 import view.MyView;
 import view.View;
 
+/**
+ * Run main program.
+ * @author  Dan Khrakovsky & Barak Eduard
+ * @version 1.0
+ * @since   2016-13-09
+ */
 public class Run {
 
 	public static void main(String[] args) {

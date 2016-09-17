@@ -22,12 +22,20 @@ import algorithms.io.MyCompressorOutputStream;
 import algorithms.io.MyDecompressorInputStream;
 import algorithms.mazaGeneratios.GrowingTreeGenerator;
 import algorithms.mazaGeneratios.Maze3d;
+import algorithms.mazaGeneratios.Maze3dGenerator;
 import algorithms.mazaGeneratios.Position;
 import algorithms.search.BFS;
 import algorithms.search.DFS;
 import algorithms.search.Solution;
 import controller.Command;
 import controller.Controller;
+
+/**
+ * Class MyModel
+ * @author  Dan Khrakovsky & Barak Eduard
+ * @version 1.0
+ * @since   2016-13-09
+ */
 
 public class MyModel implements Model {
 	
@@ -40,22 +48,37 @@ public class MyModel implements Model {
 	
 	class GenerateMazeRunnable implements Runnable {
 
-		private int floors, rows, cols;
+		private int method, floors, rows, cols;
 		private String name;
 		private GrowingTreeGenerator generator;
+		//private Maze3dGenerator generatorr;
 		
+		/**
+		 * Instantiates a new generate maze runnable.
+		 *
+		 * @param floors
+		 *            the floors
+		 * @param rows
+		 *            the rows
+		 * @param columns
+		 *            the columns
+		 * @param name
+		 *            the name of the maze
+		 */
 		
-		public GenerateMazeRunnable(int floors, int rows, int cols, String name) {
+		public GenerateMazeRunnable(int method, int floors, int rows, int cols, String name) {
 			this.floors=floors;
 			this.rows = rows;
 			this.cols = cols;
 			this.name = name;
+			this.method = method;
+			
 		}
 		
 		@Override
 		public void run() {
 			generator = new GrowingTreeGenerator();
-			Maze3d maze = generator.generate(floors, rows, cols);
+			Maze3d maze = generator.generate(method, floors, rows, cols);
 			mazes.put(name, maze);
 			
 			controller.notifyMazeIsReady(name);			
@@ -77,8 +100,8 @@ public class MyModel implements Model {
 	}
 	
 	@Override
-	public void generateMaze(String name, int floors, int rows, int cols) {
-		GenerateMazeRunnable generateMaze = new GenerateMazeRunnable(floors, rows, cols, name);
+	public void generateMaze(String name, int method, int floors, int rows, int cols) {
+		GenerateMazeRunnable generateMaze = new GenerateMazeRunnable(method, floors, rows, cols, name);
 		generateMazeTasks.add(generateMaze);
 		Thread thread = new Thread(generateMaze);
 		thread.start();
@@ -130,7 +153,7 @@ public class MyModel implements Model {
 	}
 
 	@Override
-	public void saveToFile(Maze3d maze, String filename) {
+	public void saveToFile(Maze3d maze, String filename, String name) {
 		OutputStream out;
 		try {
 			 out=new MyCompressorOutputStream(new FileOutputStream(filename + ".maz"));
@@ -145,7 +168,7 @@ public class MyModel implements Model {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		controller.notifyMazeIsCompressed(name);
 	}
 
 	@Override

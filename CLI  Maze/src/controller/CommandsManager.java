@@ -8,6 +8,14 @@ import algorithms.search.Solution;
 import model.Model;
 import view.View;
 
+/**
+ * class CommandsManager.
+ * @author  Dan Khrakovsky & Barak Eduard
+ * @version 1.0
+ * @since   2016-13-09
+ */
+
+
 public class CommandsManager {
 	
 	private Model model;
@@ -17,6 +25,11 @@ public class CommandsManager {
 		this.model = model;
 		this.view = view;		
 	}
+	
+	/**
+	 * Creates husmap of the commands.
+	 */
+
 	
 	public HashMap<String, Command> getCommandsMap() {
 		HashMap<String, Command> commands = new HashMap<String, Command>();
@@ -33,21 +46,27 @@ public class CommandsManager {
 		return commands;
 	}
 	
+	/**
+	 * The following classes are commands implementing command class
+	 */
+
+	
 	public class GenerateMazeCommand implements Command {
 		
 		@Override
 		public void doCommand(String[] args) {
-			if (args.length != 4) {
+			if (args.length != 5) {
 				view.printError(new String[] { "Arguments Error",
-						"Please enter: maze_name floors rows cols" });
+						"Please enter: maze_name method floors rows cols" });
 				return;
 			}
 			
 			String name = args[0];
-			int floors = Integer.parseInt(args[1]);
-			int rows = Integer.parseInt(args[2]);
-			int cols = Integer.parseInt(args[3]);
-			model.generateMaze(name, floors, rows, cols);
+			int method = Integer.parseInt(args[1]);
+			int floors = Integer.parseInt(args[2]);
+			int rows = Integer.parseInt(args[3]);
+			int cols = Integer.parseInt(args[4]);
+			model.generateMaze(name, method, floors, rows, cols);
 		}		
 	}
 	
@@ -63,7 +82,7 @@ public class CommandsManager {
 			String name = args[0];
 			String filename = args[1];
 			Maze3d maze = model.getMaze(name);
-			model.saveToFile(maze, filename);
+			model.saveToFile(maze, filename, name);
 		}
 		
 	}
@@ -163,7 +182,7 @@ public class CommandsManager {
 
 		@Override
 		public void doCommand(String[] args) {
-			if (args.length != 2) {
+			if (args.length != 3) {
 				view.printError(new String[] { "Arguments Error",
 						"Please enter: maze_name index" });
 				return;

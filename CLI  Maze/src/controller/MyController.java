@@ -4,6 +4,13 @@ import algorithms.mazaGeneratios.Maze3d;
 import model.Model;
 import view.View;
 
+/**
+ * class MyController.
+ * @author  Dan Khrakovsky & Barak Eduard
+ * @version 1.0
+ * @since   2016-13-09
+ */
+
 public class MyController implements Controller {
 
 	private View view;
@@ -33,6 +40,13 @@ public class MyController implements Controller {
 	@Override
 	public void notifyMazeIsSolved(String name) {
 		view.notifyMazeIsSolved(name);
+		
+	}
+
+
+	@Override
+	public void notifyMazeIsCompressed(String name) {
+		view.notifyMazeIsCompressed(name);
 		
 	}
 

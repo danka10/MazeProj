@@ -24,7 +24,7 @@ public class SimpleMazeGenerator extends Maze3dGeneratorBase {
 	}
 	
 	@Override
-	public Maze3d generate(int floors, int rows, int cols) {
+	public Maze3d generate(int metho, int floors, int rows, int cols) {
 		Maze3d maze3d = new Maze3d(floors,rows,cols);
 		
 		int wallsNum = (int)(WALLS_RATIO * rows * cols * floors);

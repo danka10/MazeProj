@@ -7,6 +7,14 @@ import java.util.HashMap;
 
 import controller.Command;
 
+/**
+ * Class CLI - menu and input for user
+ * @author  Dan Khrakovsky & Barak Eduard
+ * @version 1.0
+ * @since   2016-13-09
+ */
+
+
 public class CLI {
 
 	private BufferedReader in;
@@ -18,6 +26,10 @@ public class CLI {
 		this.out = out;		
 	}
 	
+	/**
+	 * Prints the menu.
+	 */
+	
 	private void printMenu() {
 		out.print("Choose command: (");
 		for (String command : commands.keySet()) {
@@ -26,6 +38,10 @@ public class CLI {
 		out.println(")");
 		out.flush();
 	}
+	
+	/**
+	 * Start - handles users command choices.
+	 */
 	
 	public void start() {
 		Thread thread = new Thread(new Runnable() {

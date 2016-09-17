@@ -11,6 +11,13 @@ import algorithms.search.Solution;
 import controller.Command;
 import controller.Controller;
 
+/**
+ * Class MyView - handles display on screen requests
+ * @author  Dan Khrakovsky & Barak Eduard
+ * @version 1.0
+ * @since   2016-13-09
+ */
+
 public class MyView implements View {
 	
 	private BufferedReader in;
@@ -92,5 +99,12 @@ public class MyView implements View {
 		for (String line : msg) {
 			out.println(line);
 		}
+	}
+
+	@Override
+	public void notifyMazeIsCompressed(String name) {
+		out.println("maze " + name + " was Compressed");
+		out.flush();
+		
 	}
 }

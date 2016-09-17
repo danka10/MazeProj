@@ -34,7 +34,7 @@ public class Demo {
 
 	public void run() {		
 		Maze3dGenerator generator = new GrowingTreeGenerator();
-		Maze3d maze = generator.generate(3, 10, 10);
+		Maze3d maze = generator.generate(1, 3, 10, 10);
 		System.out.println(maze);
 		
 		MazeAdapter adapter = new MazeAdapter(maze);
