@@ -26,14 +26,23 @@ public class CommandsManager {
 		commands.put("display_cross_section", new DisplayCrossSection());
 		commands.put("solve", new MazeSolver());
 		commands.put("display_solution", new DisplaySolution());
+		commands.put("load_maze", new LoadMazeFromFile());
+		commands.put("save_maze", new SaveMazeToFile());
+		commands.put("exit", new Exit());
 		
 		return commands;
 	}
 	
 	public class GenerateMazeCommand implements Command {
-
+		
 		@Override
 		public void doCommand(String[] args) {
+			if (args.length != 4) {
+				view.printError(new String[] { "Arguments Error",
+						"Please enter: maze_name floors rows cols" });
+				return;
+			}
+			
 			String name = args[0];
 			int floors = Integer.parseInt(args[1]);
 			int rows = Integer.parseInt(args[2]);
@@ -42,10 +51,49 @@ public class CommandsManager {
 		}		
 	}
 	
+	public class SaveMazeToFile implements Command {
+
+		@Override
+		public void doCommand(String[] args) {
+			if (args.length != 2) {
+				view.printError(new String[] { "Arguments Error",
+						"Please enter: maze_name file_name" });
+				return;
+			}
+			String name = args[0];
+			String filename = args[1];
+			Maze3d maze = model.getMaze(name);
+			model.saveToFile(maze, filename);
+		}
+		
+	}
+	
+	public class LoadMazeFromFile implements Command {
+
+		@Override
+		public void doCommand(String[] args) {
+			if (args.length != 2) {
+				view.printError(new String[] { "Arguments Error",
+						"Please enter: file_name maze_name" });
+				return;
+			}
+			String filename = args[0];
+			String name = args[1];
+			Maze3d maze = model.getMaze(name);
+			model.loadFromFile(filename, name);
+		}
+		
+	}
+	
 	public class MazeSolver implements Command {
 
 		@Override
 		public void doCommand(String[] args) {
+			if (args.length != 2) {
+				view.printError(new String[] { "Arguments Error",
+						"Please enter: file_name maze_name" });
+				return;
+			}
 			String name = args[0];
 			String alg = args[1];
 			Maze3d maze = model.getMaze(name);
@@ -58,6 +106,11 @@ public class CommandsManager {
 
 		@Override
 		public void doCommand(String[] args) {
+			if (args.length != 1) {
+				view.printError(new String[] { "Arguments Error",
+						"Please enter: maze_name" });
+				return;
+			}
 			String name = args[0];
 			Maze3d maze = model.getMaze(name);
 			view.displayMaze(maze);
@@ -69,6 +122,11 @@ public class CommandsManager {
 
 		@Override
 		public void doCommand(String[] args) {
+			if (args.length != 1) {
+				view.printError(new String[] { "Arguments Error",
+						"Please enter: dir_path" });
+				return;
+			}
 			String path = args[0];
 			view.displayPath(path);
 		}
@@ -79,9 +137,24 @@ public class CommandsManager {
 
 		@Override
 		public void doCommand(String[] args) {
+			if (args.length != 1) {
+				view.printError(new String[] { "Arguments Error",
+						"Please enter: maze_name" });
+				return;
+			}
 			String name = args[0];
 			Solution<Position> sol = model.getSolution(name);
 			view.displaySolution(sol);
+		}
+		
+	}
+	
+	public class Exit implements Command {
+
+		@Override
+		public void doCommand(String[] args) {
+			model.exit();
+			System.exit(0);
 		}
 		
 	}
@@ -90,6 +163,11 @@ public class CommandsManager {
 
 		@Override
 		public void doCommand(String[] args) {
+			if (args.length != 2) {
+				view.printError(new String[] { "Arguments Error",
+						"Please enter: maze_name index" });
+				return;
+			}
 			String name = args[0];
 			String index = args[1];
 			int sector = Integer.parseInt(args[2]);

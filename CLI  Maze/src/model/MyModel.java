@@ -1,12 +1,25 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import algorithms.demo.MazeAdapter;
+import algorithms.io.MyCompressorOutputStream;
+import algorithms.io.MyDecompressorInputStream;
 import algorithms.mazaGeneratios.GrowingTreeGenerator;
 import algorithms.mazaGeneratios.Maze3d;
 import algorithms.mazaGeneratios.Position;
@@ -69,7 +82,8 @@ public class MyModel implements Model {
 		generateMazeTasks.add(generateMaze);
 		Thread thread = new Thread(generateMaze);
 		thread.start();
-		threads.add(thread);		
+		threads.add(thread);
+		
 	}
 
 	@Override
@@ -113,6 +127,50 @@ public class MyModel implements Model {
 	@Override
 	public Solution<Position> getSolution(String name) {
 		return solutions.get(name);
+	}
+
+	@Override
+	public void saveToFile(Maze3d maze, String filename) {
+		OutputStream out;
+		try {
+			 out=new MyCompressorOutputStream(new FileOutputStream(filename + ".maz"));
+				out.write(maze.toByteArray());
+				out.flush();
+				out.close();
+			//	mazes.put(name, maze);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void loadFromFile(String filename, String name) {
+		InputStream in;
+		// use to check how many files are open for a proper exit
+		//openFileCount++;
+		try {
+			
+			File fileinst = new File(filename + ".maz");
+			in = new MyDecompressorInputStream(new FileInputStream(fileinst));
+			byte b[] = new byte[(int) fileinst.length()+1];
+			in.close();
+			Maze3d loaded = new Maze3d(b);
+			mazes.put(name, loaded);
+			controller.notifyMazeIsReady(name);
+		}
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace(); 
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+	}
+		
 	}
 
 	

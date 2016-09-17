@@ -87,5 +87,10 @@ public class MyView implements View {
 		
 	}
 
-	
+	@Override
+	public void printError(String[] msg) {
+		for (String line : msg) {
+			out.println(line);
+		}
+	}
 }

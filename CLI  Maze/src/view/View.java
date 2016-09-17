@@ -15,6 +15,7 @@ public interface View {
 	void setCommands(HashMap<String, Command> commands);
 	void displayPath(String path);
 	void displaySolution(Solution<Position> sol);
+	void printError(String[] msg);
 	void start();
 	void setController(Controller controller);
 	void displayMaze(int[][] maze2d);
