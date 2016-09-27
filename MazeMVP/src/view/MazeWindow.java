@@ -18,6 +18,7 @@ import algorithms.mazaGeneratios.Maze3d;
 public class MazeWindow extends BasicWindow implements View {
 
 	private MazeDisplay mazeDisplay;
+	private String mazeName;
 	
 	@Override
 	protected void initWidgets() {
@@ -48,7 +49,23 @@ public class MazeWindow extends BasicWindow implements View {
 		
 		Button btnSolveMaze = new Button(btnGroup, SWT.PUSH);
 		btnSolveMaze.setText("Solve maze");
-		
+		btnSolveMaze.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				if (mazeName!=null){
+					setChanged();
+				notifyObservers("solve " + mazeName);
+				}
+				
+			}
+		});
 	}
 
 	protected void showGenerateMazeOptions() {
@@ -86,7 +103,7 @@ public class MazeWindow extends BasicWindow implements View {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
-				notifyObservers("generate_maze aaa " + txtMethod.getText() + " " + txtFloors.getText() + " " + txtRows.getText() + " " + txtCols.getText());
+				notifyObservers("generate_maze " + txtName.getText() + " " + txtMethod.getText() + " " + txtFloors.getText() + " " + txtRows.getText() + " " + txtCols.getText());
 				shell.close();
 			}
 			
@@ -113,6 +130,7 @@ public class MazeWindow extends BasicWindow implements View {
 				
 				setChanged();
 				notifyObservers("display_maze " + name);
+				mazeName = name;
 			}
 		});			
 	}
