@@ -86,7 +86,7 @@ public class MazeWindow extends BasicWindow implements View {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
-				notifyObservers("generate_maze aaa "  + txtFloors.getText() + " " + txtRows.getText() + " " + txtCols.getText());
+				notifyObservers("generate_maze aaa " + txtMethod.getText() + " " + txtFloors.getText() + " " + txtRows.getText() + " " + txtCols.getText());
 				shell.close();
 			}
 			
