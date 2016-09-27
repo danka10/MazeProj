@@ -34,6 +34,10 @@ public class Properties implements Serializable {
 		this.solveMazeAlgorithm = solveMazeAlgorithm;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Properties [numOfThreads=" + numOfThreads + ", generateMazeAlgorithm=" + generateMazeAlgorithm
+				+ ", solveMazeAlgorithm=" + solveMazeAlgorithm + "]";
+	}
 	
 }

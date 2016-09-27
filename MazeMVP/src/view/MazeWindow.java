@@ -54,10 +54,22 @@ public class MazeWindow extends BasicWindow implements View {
 	protected void showGenerateMazeOptions() {
 		Shell shell = new Shell();
 		shell.setText("Generate Maze");
-		shell.setSize(300, 200);
+		shell.setSize(300, 300);
 		
 		GridLayout layout = new GridLayout(2, false);
 		shell.setLayout(layout);
+		
+		Label lblName = new Label(shell, SWT.NONE);
+		lblName.setText("Name: ");
+		Text txtName = new Text(shell, SWT.BORDER);
+		
+		Label lblMethod = new Label(shell, SWT.NONE);
+		lblMethod.setText("Method: ");
+		Text txtMethod = new Text(shell, SWT.BORDER);
+		
+		Label lblFloors = new Label(shell, SWT.NONE);
+		lblFloors.setText("Floors: ");
+		Text txtFloors = new Text(shell, SWT.BORDER);
 		
 		Label lblRows = new Label(shell, SWT.NONE);
 		lblRows.setText("Rows: ");
@@ -74,7 +86,7 @@ public class MazeWindow extends BasicWindow implements View {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
-				notifyObservers("generate_maze aaa " + txtRows.getText() + " " + txtCols.getText());
+				notifyObservers("generate_maze aaa "  + txtFloors.getText() + " " + txtRows.getText() + " " + txtCols.getText());
 				shell.close();
 			}
 			
